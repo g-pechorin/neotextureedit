@@ -12,26 +12,10 @@ group = 'peterlavalle.bengie'
 dependencies {
 	compile 'org.lwjgl.lwjgl:lwjgl:2.9.1'
 	compile 'org.lwjgl.lwjgl:lwjgl_util:2.9.1'
+	compile 'com.github.insubstantial:substance:7.3'
 }
 
 repositories {
-	// Samon uses stuff in central
 	mavenCentral()
 	mavenLocal()
-
-	// Samon will be here
-	maven {
-		name "Peter's Stuff"
-		url 'https://dl.dropboxusercontent.com/u/15094498/repo/snap'
-	}
-}
-sourceSets {
-    main {
-        java {
-            srcDir 'src'
-        }
-        resources {
-           // srcDir 'src/resources'
-        }
-    }
 }
