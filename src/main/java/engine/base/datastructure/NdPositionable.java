@@ -19,8 +19,8 @@ package engine.base.datastructure;
 
 /**
  * Interface for an N-dimensional object that has a locatio like a point.
- * @author Holger Dammertz
  *
+ * @author Holger Dammertz
  */
 public interface NdPositionable {
 	//
@@ -29,6 +29,7 @@ public interface NdPositionable {
 	/**
 	 * This function is here as an experiment to try for example in the
 	 * KDTree to overwrite the distance measure
+	 *
 	 * @param p
 	 * @return
 	 */

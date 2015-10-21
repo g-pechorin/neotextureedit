@@ -175,7 +175,7 @@ public class TextureEditor implements ActionListener, KeyListener {
 	// here
 	JPanel m_CenterPanel;
 	JFrame m_MainFrame;
-	JMenuBar m_MainMenuBar;
+	public JMenuBar m_MainMenuBar;
 	JMenuItem m_File_Save_Item;
 	ImageIcon s_ButtonIconRGB_Selector;
 	ImageIcon s_ButtonIconRGBA_Selector;
@@ -220,7 +220,6 @@ public class TextureEditor implements ActionListener, KeyListener {
 
 		m_TextureFileChooser_SaveLoadImage = new JFileChooser(".");
 		m_TextureFileChooser_SaveLoadImage.addChoosableFileFilter(new TextureEditorFilenameFilter("png", "Image Files (.png)"));
-
 	}
 
 	public static void main(final String[] args) throws Throwable {

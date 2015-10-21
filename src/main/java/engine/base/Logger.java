@@ -22,9 +22,9 @@ import engine.parameters.LocalParameterManager;
 
 /**
  * This is a simple logging interface I use to output and enable/disable
- * the log messages. 
- * @author Holger Dammertz
+ * the log messages.
  *
+ * @author Holger Dammertz
  */
 public class Logger extends LocalParameterManager {
 	private static final int DEFAULT_LOG_LEVEL = 3;

@@ -21,8 +21,8 @@ import java.io.Serializable;
 
 /**
  * A Utility class.
- * @author Holger Dammertz
  *
+ * @author Holger Dammertz
  */
 public class Vector3 implements Serializable {
 	public static final Vector3 ZERO = new Vector3(0, 0, 0);
@@ -160,7 +160,9 @@ public class Vector3 implements Serializable {
 	}
 
 
-	/** this += a*v */
+	/**
+	 * this += a*v
+	 */
 	public void mult_add_ip(float a, Vector3 v) {
 		x += a * v.x;
 		y += a * v.y;
@@ -207,7 +209,8 @@ public class Vector3 implements Serializable {
 
 	/**
 	 * Computes this = (1-f)*this + f*v
-	 * @param f the weight 
+	 *
+	 * @param f the weight
 	 * @param v the second vector
 	 */
 	public void linearInterp_ip(float f, Vector3 v) {

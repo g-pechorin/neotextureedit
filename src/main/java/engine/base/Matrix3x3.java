@@ -19,8 +19,8 @@ package engine.base;
 
 /**
  * A Simple 3x3 matrix class
- * @author Holger Dammertz
  *
+ * @author Holger Dammertz
  */
 public class Matrix3x3 {
 	// 11 12 13

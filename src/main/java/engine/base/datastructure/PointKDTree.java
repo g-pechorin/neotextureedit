@@ -25,15 +25,14 @@ import engine.base.FMath;
 /**
  * This is a general n-Dimensional kd tree for storing n-d points and efficiently
  * searching neighbors.
- *
+ * <p/>
  * !!TODO: the axis distance in the traversal is currently computed using
- *         euclidean (squared) distance: this is wrong if the nd_Distance function
- *         uses some other distance measure
+ * euclidean (squared) distance: this is wrong if the nd_Distance function
+ * uses some other distance measure
  * !!TODO: make the KDPoint class also generic
  *
- * @author Holger Dammertz
- *
  * @param <Type>
+ * @author Holger Dammertz
  */
 public class PointKDTree<Type> {
 	Vector<KDPoint> tree = new Vector<KDPoint>();
@@ -66,7 +65,6 @@ public class PointKDTree<Type> {
 	}
 
 	/**
-	 *
 	 * @return The number of points in this tree
 	 */
 	public int size() {
@@ -77,7 +75,8 @@ public class PointKDTree<Type> {
 		tree.clear();
 	}
 
-	/** This method has to be called after adding points or changing the location of points
+	/**
+	 * This method has to be called after adding points or changing the location of points
 	 */
 	public void build() {
 		//System.out.print("Building kd-tree (k = "+DIM+") with " + tree.size() + " points...");

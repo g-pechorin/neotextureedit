@@ -22,8 +22,8 @@ import java.util.Vector;
 /**
  * This class can be extended to have a parameter manager that locally
  * manages all created parameters and is called when a parameter changes.
- * @author Holger Dammertz
  *
+ * @author Holger Dammertz
  */
 public class LocalParameterManager implements ParamChangeListener {
 	public Vector<AbstractParam> m_LocalParameters = new Vector<AbstractParam>();

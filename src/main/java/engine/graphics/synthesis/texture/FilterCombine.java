@@ -38,7 +38,7 @@ public class FilterCombine extends Channel {
 	}
 
 
-	private final void _function(Vector4 out, Vector4 in0, Vector4 in1, Vector4 in2, Vector4 in3) {
+	private void _function(Vector4 out, Vector4 in0, Vector4 in1, Vector4 in2, Vector4 in3) {
 		out.set(in0.get(input0channel.getEnumPos()), in1.get(input1channel.getEnumPos()),
 				in2.get(input2channel.getEnumPos()), in3.get(input3channel.getEnumPos()));
 	}

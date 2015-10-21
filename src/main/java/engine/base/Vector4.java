@@ -22,8 +22,8 @@ import java.io.Serializable;
 /**
  * A Utility class for a mathematical Vector containg 4 float values. It has also support
  * functions for interpreting the Vector4 as a color
- * @author Holger Dammertz
  *
+ * @author Holger Dammertz
  */
 public class Vector4 implements Serializable {
 	private static final long serialVersionUID = 1027934130386016305L;
@@ -134,7 +134,9 @@ public class Vector4 implements Serializable {
 		return this;
 	}
 
-	/** this += a*v */
+	/**
+	 * this += a*v
+	 */
 	public Vector4 mult_add_ip(float a, Vector4 v) {
 		x += a * v.x;
 		y += a * v.y;
@@ -215,7 +217,8 @@ public class Vector4 implements Serializable {
 
 	/**
 	 * Computes this = (1-f)*this + f*v
-	 * @param f the weight 
+	 *
+	 * @param f the weight
 	 * @param v the second vector
 	 */
 	public void linearInterp_ip(float f, Vector4 v) {

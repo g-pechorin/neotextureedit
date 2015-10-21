@@ -23,8 +23,8 @@ import javax.swing.JPanel;
 
 /**
  * A baseclass for simple gui JPanels that edit parameter values stored in AbstractParam subclasses
- * @author Holger Dammertz
  *
+ * @author Holger Dammertz
  */
 class AbstractParameterEditor extends JPanel {
 	private static final long serialVersionUID = -7348635754519937992L;

@@ -53,8 +53,8 @@ import engine.parameters.TextParam;
 /**
  * The ChannelParameterEditorPanel is used by the TextureEditor to
  * show and edit all parameters of the selected Channel.
- * @author Holger Dammertz
  *
+ * @author Holger Dammertz
  */
 public final class ChannelParameterEditorPanel extends JPanel implements ChannelChangeListener, ActionListener {
 	public static final int scrollBarSpace = 24; // reserves free space for the somtimes necessary scrollbar on the side of the parameters
@@ -67,7 +67,9 @@ public final class ChannelParameterEditorPanel extends JPanel implements Channel
 	private TextureGraphNode node; // the node that gets modified
 	private BufferedImage previewImage;
 	private JLabel benchmarkLabel;
-	/** This is used to initialize the TextParam of the export name with a preselection of possible choices. */
+	/**
+	 * This is used to initialize the TextParam of the export name with a preselection of possible choices.
+	 */
 	private String[] exportNamePreSelection = null;
 
 
@@ -124,8 +126,10 @@ public final class ChannelParameterEditorPanel extends JPanel implements Channel
 		previewPanel.setVisible(false);
 	}
 
-	/** Sets the optional pre-selection that appears in a drop down list of the channel export name parameter
-	 * @param names an array of strings 
+	/**
+	 * Sets the optional pre-selection that appears in a drop down list of the channel export name parameter
+	 *
+	 * @param names an array of strings
 	 */
 	public void setExportNamePreSelection(String[] names) {
 		exportNamePreSelection = names;
@@ -137,6 +141,7 @@ public final class ChannelParameterEditorPanel extends JPanel implements Channel
 
 	/**
 	 * Checks the class of param with all known types and returns an appropriate ParameterEditor as component
+	 *
 	 * @param param
 	 * @return null if the param was unknown
 	 */

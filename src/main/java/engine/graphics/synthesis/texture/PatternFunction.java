@@ -13,12 +13,14 @@ public final class PatternFunction extends Pattern {
 	EnumParam type = CreateLocalEnumParam("Combiner", "Multiply,Add,Max,Min,Pow");
 	FloatParam scaleX = CreateLocalFloatParam("ScaleX", 1.0f, 0.0f, Float.MAX_VALUE);
 	FloatParam scaleY = CreateLocalFloatParam("ScaleY", 1.0f, 0.0f, Float.MAX_VALUE);
+
 	public PatternFunction() {
 	}
 
 	public String getName() {
 		return "Function";
 	}
+
 	;
 
 	public String getHelpText() {

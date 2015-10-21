@@ -33,8 +33,8 @@ import engine.parameters.FloatParam;
  * This class is a (indirect) subclass of JPanel and creates a simple editor with a text field and
  * increment/decrement buttons to edit a FloatParam object. It uses the params set method to change
  * values.
- * @author Holger Dammertz
  *
+ * @author Holger Dammertz
  */
 class FloatParameterEditor extends AbstractParameterEditor implements ActionListener, FocusListener {
 	private static final long serialVersionUID = -7712009260279412308L;

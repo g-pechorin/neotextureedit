@@ -36,7 +36,6 @@ import javax.imageio.ImageIO;
  * A Collection of utility functions that are used in different projects.
  *
  * @author Holger Dammertz
- *
  */
 public final class Utils {
 
@@ -334,10 +333,8 @@ public final class Utils {
 	 * figure out a string representing the relative path of 'f' with respect to
 	 * 'r'
 	 *
-	 * @param r
-	 *            home path
-	 * @param f
-	 *            path of file
+	 * @param r home path
+	 * @param f path of file
 	 */
 	private static String matchPathLists(List<String> r, List<String> f) {
 		int i;
@@ -376,11 +373,9 @@ public final class Utils {
 	 * home = /a/b/c f = /a/d/e/x.txt s = getRelativePath(home,f) =
 	 * ../../d/e/x.txt
 	 *
-	 * @param home
-	 *            base path, should be a directory, not a file, or it doesn't
-	 *            make sense
-	 * @param f
-	 *            file to generate path for
+	 * @param home base path, should be a directory, not a file, or it doesn't
+	 *             make sense
+	 * @param f    file to generate path for
 	 * @return path from home to f as a string
 	 */
 	public static String getRelativePath(File home, File f) {

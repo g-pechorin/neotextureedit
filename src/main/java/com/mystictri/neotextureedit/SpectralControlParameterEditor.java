@@ -96,10 +96,12 @@ public class SpectralControlParameterEditor extends AbstractParameterEditor impl
 
 	}
 
-	/** sets the spectral control parameter to the value where the mouse (mx, my) points to
+	/**
+	 * sets the spectral control parameter to the value where the mouse (mx, my) points to
 	 * CTRL-Key allows for continous update (else the m_Param is set to silent)
-	 * @param mx mouse x position
-	 * @param my mouse y position
+	 *
+	 * @param mx       mouse x position
+	 * @param my       mouse y position
 	 * @param modifier the current key modifier associated with the mouse event
 	 */
 	void setAtMouse(int mx, int my, int modifier) {

@@ -21,8 +21,8 @@ import java.util.Random;
 
 /**
  * Float Math. Currently a wrapper around Math to return float values
- * @author Holger Dammertz
  *
+ * @author Holger Dammertz
  */
 public final class FMath {
 	public static final float PI = 3.1415926535897932384626f;
