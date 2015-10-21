@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Field;
 
 public class NativeUnpack {
 	public static final File folder;
@@ -12,8 +11,7 @@ public class NativeUnpack {
 	public static final String arch = System.getProperty("os.arch").toLowerCase();
 
 	static {
-		File
-				unpackDir = null;
+		File unpackDir = null;
 		try {
 			unpackDir = File.createTempFile("unpacked", "shared-objects");
 
@@ -39,34 +37,20 @@ public class NativeUnpack {
 				throw new IOException("Unknown system configuration `" + config + "`");
 			}
 
+			final byte[] data = new byte[128];
 			for (final String sharedObjectName : sharedObjects) {
 				final File sharedObjectFile = new File(unpackDir, sharedObjectName);
 
 				FileOutputStream outputStream = new FileOutputStream(sharedObjectFile);
 				InputStream inputStream = ClassLoader.getSystemResourceAsStream(sharedObjectName);
 
-				final byte[] data = new byte[256];
-
 				for (int read; -1 != (read = inputStream.read(data)); ) {
 					outputStream.write(data, 0, read);
 				}
+
 				outputStream.close();
 				inputStream.close();
 				sharedObjectFile.deleteOnExit();
-			}
-
-			//set sys_paths to null so that java.library.path will be reevalueted next time it is needed
-			try {
-				System.setProperty("java.library.path", unpackDir.getAbsolutePath() + File.pathSeparator + System.getProperty("java.library.path"));
-				final Field sysPathsField = ClassLoader.class.getDeclaredField("sys_paths");
-				sysPathsField.setAccessible(true);
-				sysPathsField.set(null, null);
-			} catch (NoSuchFieldException e) {
-				unpackDir = null;
-				throw new RuntimeException("Something is missing", e);
-			} catch (IllegalAccessException e) {
-				unpackDir = null;
-				throw new RuntimeException("I needed to modify the path for this to work", e);
 			}
 		} catch (IOException e) {
 			unpackDir = null;

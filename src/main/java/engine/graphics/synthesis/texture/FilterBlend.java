@@ -26,8 +26,8 @@ import engine.parameters.FloatParam;
 /**
  * This filter computes the output image as
  * Cout = Cin + (1-Cout.alpha) + Cout*Cout.alpha;
- * @author Holger Dammertz
  *
+ * @author Holger Dammertz
  */
 public final class FilterBlend extends Channel {
 

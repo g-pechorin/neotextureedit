@@ -40,9 +40,11 @@ public final class PatternPerlinNoise extends Pattern {
 	IntParam endBand = CreateLocalIntParam("EndBand", 8, 1, 16);
 	IntParam seed = CreateLocalIntParam("Seed", -1, -1, Integer.MAX_VALUE);
 	BoolParam periodic = CreateLocalBoolParam("Periodic", true);
+
 	public PatternPerlinNoise() {
 		spectralControl.setStartEndBand(startBand.get(), endBand.get());
 	}
+
 	public PatternPerlinNoise(float sx, float sy) {
 		this();
 		scaleX.set(sx);

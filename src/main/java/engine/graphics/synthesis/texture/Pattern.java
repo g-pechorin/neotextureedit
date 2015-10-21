@@ -25,8 +25,8 @@ import engine.parameters.Matrix3x3Param;
 /**
  * A Pattern is a function that lives on [0,1)x[0,1)=>[0,1]. It is a channel with 0 input parameters
  * and thus works as a generator. Usually it is scala valued but may also be RGB.
- * @author Holger Dammertz
  *
+ * @author Holger Dammertz
  */
 public class Pattern extends Channel {
 

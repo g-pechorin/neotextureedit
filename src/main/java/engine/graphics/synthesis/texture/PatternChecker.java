@@ -31,6 +31,7 @@ public final class PatternChecker extends Pattern {
 		scaleX = CreateLocalFloatParam("ScaleX", 1.0f, 0.0f, Float.MAX_VALUE);
 		scaleY = CreateLocalFloatParam("ScaleY", 1.0f, 0.0f, Float.MAX_VALUE);
 	}
+
 	public PatternChecker(float sx, float sy) {
 		this();
 		scaleX.set(sx);

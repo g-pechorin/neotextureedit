@@ -24,8 +24,8 @@ import javax.swing.event.ChangeListener;
 
 /**
  * This class manages all adjustable parameters. It contains only static members.
- * @author Holger Dammertz
  *
+ * @author Holger Dammertz
  */
 public class ParameterManager {
 

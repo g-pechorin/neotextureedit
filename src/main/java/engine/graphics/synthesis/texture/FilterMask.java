@@ -24,8 +24,8 @@ import engine.parameters.BoolParam;
 /**
  * This filter computes the output image as
  * Cout = Cin + (1-Cout.alpha) + Cout*Cout.alpha;
- * @author Holger Dammertz
  *
+ * @author Holger Dammertz
  */
 public final class FilterMask extends Channel {
 	BoolParam invert = CreateLocalBoolParam("Invert", false);

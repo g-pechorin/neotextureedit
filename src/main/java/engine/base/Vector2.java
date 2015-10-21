@@ -19,8 +19,8 @@ package engine.base;
 
 /**
  * A Utility class.
- * @author Holger Dammertz
  *
+ * @author Holger Dammertz
  */
 public class Vector2 {
 	public float x, y;

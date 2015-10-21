@@ -29,11 +29,10 @@ import engine.graphics.synthesis.texture.Channel;
  * A TextureNode represents a Channel (Pattern or Filter) from
  * the texture generation source code. It also manages the connections.
  * It contains also an absolute position that should be used for graph rendering.
- *
+ * <p/>
  * !!TODO: simplify the location handling (and remove most of the methods)
  *
  * @author Holger Dammertz
- *
  */
 public final class TextureGraphNode {
 	public static final int width = 64 + 8;
@@ -156,6 +155,7 @@ public final class TextureGraphNode {
 	/**
 	 * Checks if the given point (in world coordinates) is contained inside the node
 	 * by checking if (getX() <= x <= getX()+width) && (getY() <= y <= getY()+width))
+	 *
 	 * @param x the x position in world coordinates
 	 * @param y the y position in world coordinates
 	 * @return
@@ -187,7 +187,6 @@ public final class TextureGraphNode {
 	 * and size that are relative to the parent.
 	 *
 	 * @author Holger Dammertz
-	 *
 	 */
 	public static class ConnectionPoint {
 		//public int direction; // 0 input; 1 output

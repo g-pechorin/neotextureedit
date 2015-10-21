@@ -26,6 +26,7 @@ public final class PatternTile extends Pattern {
 	FloatParam borderX;
 	FloatParam borderY;
 	FloatParam smooth;
+
 	public PatternTile() {
 		borderX = CreateLocalFloatParam("BorderX", 0.1f, 0.0f, 0.5f);
 		borderX.setDefaultIncrement(0.025f);

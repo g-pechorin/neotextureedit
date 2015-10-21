@@ -47,10 +47,8 @@ public final class Noise3D_ImprovedPerlin {
 	float size;
 
 	/**
-	 *
 	 * @param size
-	 * @param seed
-	 *            if seed >= 0 it is given to new Random(seed); -1 uses the values from Ken Perlin's reference implementation
+	 * @param seed if seed >= 0 it is given to new Random(seed); -1 uses the values from Ken Perlin's reference implementation
 	 */
 	public Noise3D_ImprovedPerlin(int size, int seed) {
 		this.size = size;
@@ -126,7 +124,7 @@ public final class Noise3D_ImprovedPerlin {
 	 * This method samples the perlin noise in a periodic way: the period can be given for each axis separately.
 	 * To work correctly: x \in [0, nx) then periodX = nx; (smaller nx are possible but result in unnessecary repetion.
 	 * Values larger then 256 don't change anything since the noise function has an inherent period of 256.
-	 *
+	 * <p/>
 	 * The periodicity is achieved by repeating the gradient vectors at the border of the [0, periodX] box
 	 * This is described in "Texturing and Modelling - A Procedural Approach" on page 85 (top)
 	 * (See also http://drilian.com/category/development/graphics/procedural-textures/)

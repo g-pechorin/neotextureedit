@@ -42,7 +42,6 @@ class Matrix3x3ParameterEditor extends AbstractParameterEditor implements Docume
 	boolean ignoreDocumentEvent = false; // some kind of hack to avoid notifying an event when updating all text fields at once after a matrix change through a button press
 
 	/**
-	 *
 	 * @param m
 	 * @param c TEMP: giving the channel here solves the problem of not having a Matrix3x3 parameter yet
 	 */

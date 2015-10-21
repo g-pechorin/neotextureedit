@@ -37,7 +37,6 @@ import engine.parameters.TextParam;
  * more inputs and produces a single output value (either scalar or RGB)
  *
  * @author Holger Dammertz
- *
  */
 public abstract class Channel extends LocalParameterManager {
 	public static float deltaFac = 4.0f;
@@ -85,10 +84,8 @@ public abstract class Channel extends LocalParameterManager {
 	 * For Parameter storage all spaces in a name are replaced with an
 	 * underscore _
 	 *
-	 * @param w
-	 *            The Writer to write to
-	 * @param c
-	 *            The Channel that will be saved
+	 * @param w The Writer to write to
+	 * @param c The Channel that will be saved
 	 * @throws IOException
 	 */
 	public static void saveChannel(Writer w, Channel c) throws IOException {
@@ -142,7 +139,9 @@ public abstract class Channel extends LocalParameterManager {
 		return "Channel";
 	}
 
-	/** Checks if the channel is marked for export into a texture image */
+	/**
+	 * Checks if the channel is marked for export into a texture image
+	 */
 	public boolean isMarkedForExport() {
 		return (exportName.get().length() > 0);
 	}

@@ -75,8 +75,8 @@ import engine.graphics.synthesis.texture.Pattern;
 /**
  * This is the main texture graph editing panel that is used to create and modify
  * a texture generation graph using TextureGraphNode objects.
- * @author Holger Dammertz
  *
+ * @author Holger Dammertz
  */
 public final class TextureGraphEditorPanel extends JPanel implements MouseListener, MouseMotionListener, MouseWheelListener, ActionListener, ChannelChangeListener, TextureGraphListener {
 	private static final long serialVersionUID = 4535161419971720668L;
@@ -669,7 +669,7 @@ public final class TextureGraphEditorPanel extends JPanel implements MouseListen
 	}
 
 	/**
-	 *  computes the bounding box of all positions and centers it computes the bounding box of all positions and centers it
+	 * computes the bounding box of all positions and centers it computes the bounding box of all positions and centers it
 	 */
 	public void centerDesktop() {
 		int minX = Integer.MAX_VALUE;
@@ -917,8 +917,10 @@ public final class TextureGraphEditorPanel extends JPanel implements MouseListen
 //		}
 	}
 
-	/** Checks if a PreviewWindow exists for the given TextureGraphNode and
+	/**
+	 * Checks if a PreviewWindow exists for the given TextureGraphNode and
 	 * removes it.
+	 *
 	 * @param node
 	 */
 	void removePreviewWindowByTextureNode(TextureGraphNode node) {
@@ -958,18 +960,20 @@ public final class TextureGraphEditorPanel extends JPanel implements MouseListen
 	/**
 	 * This interface is used by the TextureGraphEditorPanel to notify about changes in the
 	 * graph when edit operations are performed.
-	 * @author Holger Dammertz
 	 *
+	 * @author Holger Dammertz
 	 */
 	public static interface EditChangeListener {
-		/** Called on each edit operation that changes the graph or the graph layout */
+		/**
+		 * Called on each edit operation that changes the graph or the graph layout
+		 */
 		public void graphWasEdited();
 	}
 
 	/**
 	 * Used in the draw method to generate a preview image that is cached
-	 * @author Holger Dammertz
 	 *
+	 * @author Holger Dammertz
 	 */
 	class NodePreviewImage implements ChannelChangeListener {
 		BufferedImage previewImage;
@@ -1078,7 +1082,9 @@ public final class TextureGraphEditorPanel extends JPanel implements MouseListen
 
 		}
 
-		/** call this with world space position to make a click inside the window */
+		/**
+		 * call this with world space position to make a click inside the window
+		 */
 		public boolean doClick(int x, int y) {
 			for (MiniButton b : miniButtons) {
 				if (b.inside(x - posX, y - posY)) {

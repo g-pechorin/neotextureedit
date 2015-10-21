@@ -138,15 +138,12 @@ public class TextureEditor implements ActionListener, KeyListener {
 			+ "engine.graphics.synthesis.texture.PatternConstantColor "
 			+ "ExportName \"\" Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color 0.8 0.4 0.7 endparameters ";
 	final CommandLineOptions commandLineOptions = new CommandLineOptions();
-	// String m_CurrentFileName = null;
+
 	public File m_CurrentFile;
 	public Channel dragndropChannel = null;
 	public OpenGLPreviewPanel m_OpenGLPreviewPanel; // !!TODO: remove the public
 	Preferences preferences = Preferences.userRoot().node("com.mystictri.NeoTextureEdit");
-	String m_CurrentPath = null;
-	// The default Presets that are loaded when no preset file is found
-	// final String defaultNTEPresets =
-	// "18\nengine.graphics.synthesis.texture.PatternPerlinNoise\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 5 1.0 1.0 1.0 1.0 0.0 0.83137256 0.827451 0.827451 1.0 0.37198067 0.0 0.0 0.0 1.0 0.5458937 0.78039217 0.7764706 0.7764706 1.0 0.65700483 1.0 0.99607843 0.99607843 1.0 1.0 ScaleX 3.0 ScaleY 2.0 ValueScale 1.0 Persistence 0.5 StartBand 1 EndBand 3 Seed -1 Periodic true endparameters\nengine.graphics.synthesis.texture.PatternPerlinNoise\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 8 0.7882353 0.49803922 0.023529412 1.0 0.0 0.91764706 0.8784314 0.05490196 1.0 0.10628019 0.89 0.329199 0.177758 1.0 0.15458937 0.5562499 0.20574935 0.11109874 1.0 0.21256039 0.0 0.0 0.0 1.0 0.28985506 0.14565827 0.13333333 0.11988795 1.0 0.4589372 0.50980395 0.46666667 0.41960785 1.0 0.68599033 0.8156863 0.8117647 0.8117647 1.0 1.0 ScaleX 2.0 ScaleY 2.0 ValueScale 1.0 Persistence 0.875 StartBand 2 EndBand 8 Seed -1 Periodic true endparameters\nengine.graphics.synthesis.texture.PatternCellular\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 9 0.198883 0.3 0.135 1.0 0.0 0.406805 0.613636 0.276136 1.0 0.10337928 0.324169 0.454545 0.114714 1.0 0.29771367 0.098346 0.136364 0.085909 1.0 0.44657052 0.196692 0.272727 0.171818 1.0 0.5964217 0.272727 0.21499 0.203431 1.0 0.68787223 0.430776 0.666667 0.326636 1.0 0.78330016 0.36939 0.42 0.3444 1.0 0.90258443 0.091517 0.26 0.0 1.0 0.99999994 Cell_Type 4 Distance_ 0 PointGen 0 Seed 0 Intensity 1.0 Jitter 0.0 NumPoints 16 RandColor false Periodic true endparameters\nengine.graphics.synthesis.texture.PatternCellular\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 2 0.0 0.0 0.0 1.0 0.0 0.8 0.8 0.0 1.0 1.0 Cell_Type 0 Distance_ 0 PointGen 0 Seed 0 Intensity 1.0 Jitter 0.0 NumPoints 26 RandColor false Periodic true endparameters\nengine.graphics.synthesis.texture.PatternPerlinNoise\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 6 0.5764706 0.5411765 0.5019608 1.0 0.004830897 0.36862746 0.3529412 0.32156864 1.0 0.20772946 0.18998075 0.16630016 0.11761947 1.0 0.37681162 0.006127451 0.006127451 0.006127451 1.0 0.64734304 0.42352942 0.39607844 0.3529412 1.0 0.82608694 0.34901962 0.29803923 0.2627451 1.0 1.0 ScaleX 4.0 ScaleY 5.0 ValueScale 1.0 Persistence 0.75 StartBand 1 EndBand 8 Seed 22 Periodic true endparameters\nengine.graphics.synthesis.texture.PatternPerlinNoise\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 12 1.0 1.0 1.0 1.0 0.09178744 0.0 0.4 0.4 1.0 0.13043478 0.0 0.4 0.4 1.0 0.17874396 1.0 1.0 1.0 1.0 0.22705314 1.0 1.0 1.0 1.0 0.44444445 0.0 0.4 0.4 1.0 0.49758455 0.0 0.4 0.4 1.0 0.5410628 1.0 1.0 1.0 1.0 0.589372 1.0 1.0 1.0 1.0 0.7487923 0.0 0.4 0.4 1.0 0.8115942 0.0 0.4 0.4 1.0 0.8647343 1.0 1.0 1.0 1.0 0.9178744 ScaleX 2.0 ScaleY 2.0 ValueScale 1.0 Persistence 0.6875 StartBand 1 EndBand 10 Seed 17 Periodic true endparameters\nengine.graphics.synthesis.texture.PatternPerlinNoise\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 9 1.0 1.0 1.0 1.0 0.09178744 0.6 0.6 0.0 1.0 0.14975846 1.0 1.0 1.0 1.0 0.22705314 1.0 1.0 1.0 1.0 0.44444445 0.6 0.6 0.0 1.0 0.5169082 1.0 1.0 1.0 1.0 0.589372 1.0 1.0 1.0 1.0 0.7487923 0.6 0.6 0.0 1.0 0.8357488 1.0 1.0 1.0 1.0 0.9178744 ScaleX 2.0 ScaleY 2.0 ValueScale 1.0 Persistence 0.6875 StartBand 1 EndBand 4 Seed 15 Periodic true endparameters\nengine.graphics.synthesis.texture.PatternCellular\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 6 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 1.0 0.5636701 0.89 0.329199 0.177758 1.0 0.7153562 1.0 1.0 0.0 1.0 0.8352055 0.91 0.574437 0.0 1.0 0.8820228 0.727273 0.127938 0.14837 1.0 0.99999994 Cell_Type 4 Distance_ 0 PointGen 2 Seed 0 Intensity 1.0 Jitter 0.0 NumPoints 23 RandColor false Periodic true endparameters\nengine.graphics.synthesis.texture.PatternBrick\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 4 0.0 0.0 0.0 1.0 0.0 0.7254902 0.36078432 0.36078432 1.0 0.08695652 0.44313726 0.21176471 0.21176471 1.0 0.531401 1.0 0.4 0.4 1.0 1.0 NumX 4 NumY 6 Shift 0.5 RandShift 0.1 GapX 0.03 GapY 0.03 Smooth 0.05 RandColor true endparameters\nengine.graphics.synthesis.texture.PatternBrick\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 6 0.003921569 0.003921569 0.003921569 1.0 0.0 0.003921569 0.003921569 0.003921569 1.0 0.08695652 0.654902 0.4862745 0.23529412 1.0 0.16425121 0.34 0.128091 0.107291 1.0 0.44927537 0.74509805 0.39215687 0.16862746 1.0 0.7198068 0.204545 0.121376 0.046011 1.0 1.0 NumX 14 NumY 1 Shift 0.5 RandShift 0.1 GapX 0.005000001 GapY 0.0 Smooth 0.009375 RandColor true endparameters\nengine.graphics.synthesis.texture.PatternFunction\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 6 1.0 1.0 1.0 1.0 0.0 0.0 0.0 0.0 1.0 0.5636701 0.89 0.329199 0.177758 1.0 0.7153562 1.0 1.0 0.0 1.0 0.8352055 0.91 0.574437 0.0 1.0 0.8820228 0.727273 0.127938 0.14837 1.0 0.99999994 FunctionU 0 FunctionV 0 Combiner 0 ScaleX 13.0 ScaleY 3.0 endparameters\nengine.graphics.synthesis.texture.PatternFunction\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 4 0.0 0.0 0.0 1.0 0.0 0.2 0.2 0.2 1.0 0.62801933 0.0 0.8 0.8 1.0 0.9130435 1.0 1.0 1.0 1.0 1.0 FunctionU 0 FunctionV 0 Combiner 2 ScaleX 4.0 ScaleY 4.0 endparameters\nengine.graphics.synthesis.texture.PatternPerlinNoise\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 2 0.0 0.0 1.0 1.0 0.2657005 1.0 1.0 1.0 1.0 0.68599033 ScaleX 2.0 ScaleY 2.0 ValueScale 1.0 Persistence 0.75 StartBand 1 EndBand 10 Seed 2 Periodic true endparameters\nengine.graphics.synthesis.texture.PatternTile\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 2 0.0 0.0 0.0 1.0 0.0 1.0 1.0 1.0 1.0 1.0 BorderX 0.1 BorderY 0.1 Smooth 0.025 endparameters\nengine.graphics.synthesis.texture.PatternCellular\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 2 1.0 1.0 0.0 1.0 0.096618354 0.0 0.0 0.0 1.0 0.28502417 Cell_Type 0 Distance_ 0 PointGen 1 Seed 0 Intensity 1.0 Jitter 0.625 NumPoints 64 RandColor false Periodic true endparameters\nengine.graphics.synthesis.texture.PatternCellular\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 2 0.0 0.0 0.0 1.0 0.2173913 1.0 1.0 1.0 1.0 0.41062802 Cell_Type 4 Distance_ 0 PointGen 2 Seed 0 Intensity 1.0 Jitter 0.0 NumPoints 32 RandColor false Periodic true endparameters\nengine.graphics.synthesis.texture.PatternChecker\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color_Mapping 2 0.0 0.0 0.0 1.0 0.0 1.0 1.0 1.0 1.0 1.0 ScaleX 1.0 ScaleY 1.0 endparameters\nengine.graphics.synthesis.texture.PatternConstantColor\n Transformation 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0 Color 0.8 0.4 0.7 endparameters\n";
+
 	String NTEPresetString;
 	Vector<Class<?>> allPatterns = new Vector<Class<?>>();
 	Vector<Class<?>> allChannels = new Vector<Class<?>>();
@@ -155,7 +152,6 @@ public class TextureEditor implements ActionListener, KeyListener {
 	JFileChooser m_TextureFileChooser_SaveLoadImage;
 	ProgressDialog m_ProgressDialog;
 
-	// + "Send comments, suggestions, bugs to holger.dammertz@googlemail.com";
 	String title = "NeoTextureEdit - Version " + programVersionNumber;
 	String help_message = "NeoTextureEdit " + programVersionNumber + " Help Overview\n\n"
 			+ "Right Click on empty space: create texture channels and patterns\n" + "Middle Click: Drag the Graph Canvas\n"
@@ -175,16 +171,19 @@ public class TextureEditor implements ActionListener, KeyListener {
 	// here
 	JPanel m_CenterPanel;
 	JFrame m_MainFrame;
-	JMenuBar m_MainMenuBar;
+	public JMenuBar m_MainMenuBar;
 	JMenuItem m_File_Save_Item;
 	ImageIcon s_ButtonIconRGB_Selector;
 	ImageIcon s_ButtonIconRGBA_Selector;
 	ImageIcon s_ButtonIconA_Selector;
 
 	public TextureEditor(String[] args) {
-		if (INSTANCE != null)
+		if (INSTANCE != null) {
 			Logger.logFatal(this, "Multiple instances of TextureEditor are not allowed.");
+		}
+
 		INSTANCE = this;
+
 		// now parse the command line
 		commandLineOptions.parse(args);
 
@@ -221,6 +220,69 @@ public class TextureEditor implements ActionListener, KeyListener {
 		m_TextureFileChooser_SaveLoadImage = new JFileChooser(".");
 		m_TextureFileChooser_SaveLoadImage.addChoosableFileFilter(new TextureEditorFilenameFilter("png", "Image Files (.png)"));
 
+		{
+			m_MainFrame = new JFrame();
+			m_MainFrame.addKeyListener(this);
+
+			setTitle(title);
+			m_MainFrame.setIconImage(ChannelUtils.createAndComputeImage(new PatternChecker(2, 2), 16, 16, null, 0));
+			m_MainFrame.addWindowListener(new WindowAdapter() {
+				public void windowClosing(WindowEvent e) {
+					Window win = e.getWindow();
+					win.dispose();
+				}
+
+				public void windowClosed(WindowEvent je) {
+					exitTextureEditor();
+					System.exit(0);
+				}
+			});
+
+			m_MainFrame.setLayout(new BorderLayout());
+
+			m_CenterPanel = new JPanel(new BorderLayout());
+
+			m_CenterPanel.add(m_PatternSelector, BorderLayout.WEST);
+			m_CenterPanel.add(m_GraphDrawPanel, BorderLayout.CENTER);
+
+			if (GL_ENABLED) {
+				m_CenterPanel.add(m_OpenGLPreviewPanel, BorderLayout.SOUTH);
+			}
+
+			m_MainFrame.getContentPane().add(m_GraphDrawPanel.getParameterEditorPanel(), BorderLayout.EAST);
+			m_MainFrame.getContentPane().add(m_CenterPanel, BorderLayout.CENTER);
+
+			createMainMenu();
+
+			m_MainFrame.setJMenuBar(m_MainMenuBar);
+
+			m_ProgressDialog = new ProgressDialog(m_MainFrame);
+		}
+
+		{
+			loadAndSetExitParameters(commandLineOptions.filename);
+			m_PatternSelector.loadPresets();
+		}
+
+		if (MAC_OS_X) {
+			try {
+				// Generate and register the OSXAdapter, passing it a hash of
+				// all the methods we wish to
+				// use as delegates for various
+				// com.apple.eawt.ApplicationListener methods
+				OSXAdapter.setQuitHandler(this, getClass().getDeclaredMethod("onQuit", (Class[]) null));
+				// OSXAdapter.setAboutHandler(this,
+				// getClass().getDeclaredMethod("about", (Class[])null));
+				// OSXAdapter.setPreferencesHandler(this,
+				// getClass().getDeclaredMethod("preferences", (Class[])null));
+				System.setProperty("apple.laf.useScreenMenuBar", "true");
+			} catch (Exception e) {
+				System.err.println("Error while loading the OSXAdapter:");
+				e.printStackTrace();
+			}
+		}
+
+		m_MainFrame.setVisible(true);
 	}
 
 	public static void main(final String[] args) throws Throwable {
@@ -255,11 +317,7 @@ public class TextureEditor implements ActionListener, KeyListener {
 					System.err.println("LookAndFeel Exception: " + e);
 				}
 
-				TextureEditor te = new TextureEditor(args);
-				te.createMainFrame();
-				te.initialize();
-				te.registerForMacOSXEvents();
-				te.m_MainFrame.setVisible(true);
+				new TextureEditor(args);
 			}
 		});
 	}
@@ -513,59 +571,6 @@ public class TextureEditor implements ActionListener, KeyListener {
 		System.exit(0);
 	}
 
-	/**
-	 * This method creates the main window for a stand alone NeoTextureEdit
-	 * application
-	 */
-	public void createMainFrame() {
-		m_MainFrame = new JFrame();
-		m_MainFrame.addKeyListener(this);
-
-		setTitle(title);
-		m_MainFrame.setIconImage(ChannelUtils.createAndComputeImage(new PatternChecker(2, 2), 16, 16, null, 0));
-		m_MainFrame.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				Window win = e.getWindow();
-				win.dispose();
-			}
-
-			public void windowClosed(WindowEvent je) {
-				exitTextureEditor();
-				System.exit(0);
-			}
-		});
-
-		m_MainFrame.setLayout(new BorderLayout());
-
-		m_CenterPanel = new JPanel(new BorderLayout());
-
-		m_CenterPanel.add(m_PatternSelector, BorderLayout.WEST);
-		m_CenterPanel.add(m_GraphDrawPanel, BorderLayout.CENTER);
-
-		if (GL_ENABLED) {
-			m_CenterPanel.add(m_OpenGLPreviewPanel, BorderLayout.SOUTH);
-		}
-
-		m_MainFrame.getContentPane().add(m_GraphDrawPanel.getParameterEditorPanel(), BorderLayout.EAST);
-		m_MainFrame.getContentPane().add(m_CenterPanel, BorderLayout.CENTER);
-
-		createMainMenu();
-
-		m_MainFrame.setJMenuBar(m_MainMenuBar);
-
-		m_ProgressDialog = new ProgressDialog(m_MainFrame);
-	}
-
-	// GradientEditorPanel m_GradientEditorPanel;
-
-	/**
-	 * If you create a stand alone frame using the method createMainFrame this
-	 * method needs to be called afterwards
-	 */
-	public void initialize() {
-		loadAndSetExitParameters(commandLineOptions.filename);
-		m_PatternSelector.loadPresets();
-	}
 
 	private void saveExitParameters() {
 		m_PatternSelector.savePresets(); // stores them in a string in
@@ -732,30 +737,6 @@ public class TextureEditor implements ActionListener, KeyListener {
 	public void onQuit() {
 		if (m_MainFrame != null)
 			m_MainFrame.dispose();
-	}
-
-	// Generic registration with the Mac OS X application menu
-	// Checks the platform, then attempts to register with the Apple EAWT
-	// See OSXAdapter.java to see how this is done without directly referencing
-	// any Apple APIs
-	public void registerForMacOSXEvents() {
-		if (MAC_OS_X) {
-			try {
-				// Generate and register the OSXAdapter, passing it a hash of
-				// all the methods we wish to
-				// use as delegates for various
-				// com.apple.eawt.ApplicationListener methods
-				OSXAdapter.setQuitHandler(this, getClass().getDeclaredMethod("onQuit", (Class[]) null));
-				// OSXAdapter.setAboutHandler(this,
-				// getClass().getDeclaredMethod("about", (Class[])null));
-				// OSXAdapter.setPreferencesHandler(this,
-				// getClass().getDeclaredMethod("preferences", (Class[])null));
-				System.setProperty("apple.laf.useScreenMenuBar", "true");
-			} catch (Exception e) {
-				System.err.println("Error while loading the OSXAdapter:");
-				e.printStackTrace();
-			}
-		}
 	}
 
 	/**

@@ -26,8 +26,8 @@ import java.util.Vector;
  * A Param that stores several strings and can be used as an enum. It can be also seen as an int-parameter where
  * every number from 0 to n has a name. The enumList string should be a comma separated list; no spaces should be
  * between the commas.
- * @author Holger Dammertz
  *
+ * @author Holger Dammertz
  */
 public final class EnumParam extends AbstractParam {
 	private final Vector<String> enums = new Vector<String>();
