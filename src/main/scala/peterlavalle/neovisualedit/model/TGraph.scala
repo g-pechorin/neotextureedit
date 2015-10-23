@@ -5,11 +5,10 @@ import java.util
 import scala.collection.JavaConversions._
 
 trait TGraph {
-	def +(node: TNode): Unit =
-		nodeList.add(node)
+	def +(node: TNode): Unit = nodeList.add(node)
 
 	def unlinkAllInto(channel: TChannel): Unit = {
-		if (linkList.nonEmpty)(linkList.size() - 1 to 0).foreach {
+		if (linkList.nonEmpty) (linkList.size() - 1 to 0).foreach {
 			case index =>
 				if (linkList(index).channel == channel)
 					linkList.remove(index)

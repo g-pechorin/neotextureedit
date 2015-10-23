@@ -15,30 +15,30 @@ object Demo extends JFrame("Demoooo") with App {
 	case class Channel(node: model.TNode, name: String) extends model.TChannel
 
 	case class DemoNode(name: String) extends TNode {
-		override val drops: List[TDrop] = List(Drop(this, "foo"))
-		//, Drop(this, "bar"))
+		override val drops: List[TDrop] = List(Drop(this, "foo"), Drop(this, "bar"))
 		override val channels: List[TChannel] = List(Channel(this, "bey"), Channel(this, "data-cham"), Channel(this, "duta-chum"))
 	}
 
-	private val graph = new view.Graph(
-		new model.TGraph {
-			/**
-			 * try to create a link between two pips and return false iff it fails
-			 */
-			override def tryLink(drop: model.TDrop, channel: model.TChannel): Boolean = {
-				if (inputs(drop.node).contains(channel.node))
-					false
-				else {
-					// TODO ; remove old link
-					unlinkAllInto(channel)
+	private val graph =
+		new view.Graph(
+			new model.TGraph {
+				/**
+				 * try to create a link between two pips and return false iff it fails
+				 */
+				override def tryLink(drop: model.TDrop, channel: model.TChannel): Boolean = {
+					if (inputs(drop.node).contains(channel.node))
+						false
+					else {
+						// TODO ; remove old link
+						unlinkAllInto(channel)
 
+						hardLink(drop, channel)
 
-
-					hardLink(drop, channel)
-					true
+						true
+					}
 				}
 			}
-		})
+		)
 
 	graph.graph + DemoNode("Foo")
 	graph.graph + DemoNode("Bar")
@@ -51,9 +51,7 @@ object Demo extends JFrame("Demoooo") with App {
 	graph.addMouseMotionListener(new control.DragNode())
 
 	getContentPane.add(
-		new JScrollPane(
-			graph
-		),
+		new JScrollPane(graph),
 		BorderLayout.CENTER
 	)
 
