@@ -28,10 +28,11 @@ class DumboActions extends TAction {
 
 import scala.collection.JavaConversions._
 
+import java.util
 
 @Named
 @org.eclipse.sisu.EagerSingleton
-class AddMenus @Inject()(commands: util.Map[String, TAction]) {
+class AddMenus @Inject()(commands: java.util.Map[String, TAction]) {
 
 	val rBound = "(\\w+)://((\\w+/)+)([^/]+)".r
 

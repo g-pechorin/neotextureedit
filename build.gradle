@@ -17,11 +17,15 @@ dependencies {
 	compile 'com.github.insubstantial:substance:7.3'
 
 	compile 'org.scala-lang:scala-library:2.11.6'
+	compile 'org.json:json:20150729'
 
 //	compile 'com.netflix.governator:governator:1.10.5'
 
 	compile 'org.eclipse.sisu:org.eclipse.sisu.inject:0.3.2'
 	compile 'com.google.inject:guice:4.0'
+
+
+	testCompile 'junit:junit:4.12'
 
 }
 

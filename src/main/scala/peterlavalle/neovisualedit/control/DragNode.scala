@@ -30,33 +30,35 @@ class DragNode() extends MouseMotionListener {
 
 	override def mouseDragged(e: MouseEvent): Unit = {
 		updateDelta(e)
-		NodeFromMouse(e) match {
-			case (graph, node) if node != null =>
-				node.x += i
-				node.y += j
 
-				if (node.x < 0) {
-					val i = -node.x
-					graph.nodes.foreach {
-						case other =>
-							other.x += i
+		if (!e.isConsumed)
+			nodeFromMouse(e) match {
+				case (graph, node) if node != null =>
+					node.x += i
+					node.y += j
+
+					if (node.x < 0) {
+						val i = -node.x
+						graph.nodeCache.values.foreach {
+							case other =>
+								other.x += i
+						}
+						require(0 == node.x)
 					}
-					require(0 == node.x)
-				}
 
-				if (node.y < 0) {
-					val i = -node.y
-					graph.nodes.foreach {
-						case other =>
-							other.y += i
+					if (node.y < 0) {
+						val i = -node.y
+						graph.nodeCache.values.foreach {
+							case other =>
+								other.y += i
+						}
+						require(0 == node.y)
 					}
-					require(0 == node.y)
-				}
 
-				graph.repaint()
-				e.consume()
-			case _ =>
-				;
-		}
+					graph.repaint()
+					e.consume()
+				case _ =>
+					;
+			}
 	}
 }

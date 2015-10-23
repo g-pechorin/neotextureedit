@@ -6,7 +6,7 @@ object SelectNode extends MouseListener {
 	override def mouseExited(e: MouseEvent): Unit = {}
 
 	override def mouseClicked(e: MouseEvent): Unit = {
-		NodeFromMouse(e) match {
+		nodeFromMouse(e) match {
 			case (graph, null) =>
 				graph.selectedNodeClear
 				graph.repaint()
