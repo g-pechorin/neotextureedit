@@ -26,15 +26,15 @@ object RestoreFrame {
 		override def windowClosing(e: WindowEvent): Unit = {
 			e.getSource match {
 				case frame: JFrame =>
-					new FileWriter(frame.getClass.getName + "-" + frame.getName + ".json").append(
-						JSON(
-							"w" -> frame.getWidth,
-							"h" -> frame.getHeight,
-							"x" -> frame.getLocation.x,
-							"y" -> frame.getLocation.y,
-							"m" -> (0 != (frame.getExtendedState & Frame.MAXIMIZED_BOTH))
-						).toString
-					).close()
+					JSON(
+						"w" -> frame.getWidth,
+						"h" -> frame.getHeight,
+						"x" -> frame.getLocation.x,
+						"y" -> frame.getLocation.y,
+						"m" -> (0 != (frame.getExtendedState & Frame.MAXIMIZED_BOTH))
+					)
+						.write(new FileWriter(frame.getClass.getName + "-" + frame.getName + ".json"))
+						.close()
 			}
 		}
 	}
@@ -44,7 +44,6 @@ object RestoreFrame {
 			frame.addWindowListener(DoLaterAdapter)
 		} else {
 			frame.pack()
-
 
 			val file = new File(frame.getClass.getName + "-" + frame.getName + ".json")
 

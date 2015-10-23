@@ -50,14 +50,13 @@ class Graph(var graph: model.TGraph) extends JComponent {
 		def origin: (Int, Int)
 
 		def distanceSq(x: Int, y: Int) = {
-
 			origin match {
 				case (i, j) =>
 					val dropHalf = skin.dropSize / 2
 					val u = Math.max(0, Math.abs(x - i) - dropHalf)
 					val v = Math.max(0, Math.abs(y - j) - dropHalf)
 
-					(u + v)
+					u + v
 			}
 		}
 
