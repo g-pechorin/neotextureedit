@@ -2,11 +2,14 @@ package peterlavalle.neovisualedit.view
 
 import java.awt.{Graphics, Graphics2D}
 import java.beans.PropertyChangeEvent
+import java.util
 import javax.swing.JComponent
 
 import peterlavalle.neovisualedit.model
-import peterlavalle.neovisualedit.model.TNode
+import peterlavalle.neovisualedit.model.{TGraph, TModelListener, TNode}
 import peterlavalle.neovisualedit.util.Cache
+
+import scala.collection.JavaConversions._
 
 /**
  * Long but shallow class to draw a graph.
@@ -18,25 +21,43 @@ import peterlavalle.neovisualedit.util.Cache
  * Should cache husks between frames
  *
  */
-class Graph(var graph: model.TGraph) extends JComponent {
+class Graph(val graph: model.TGraph) extends JComponent {
+
+	private object AdaptionListener extends TModelListener {
+		override def onNodeAdded(graph: TGraph, node: TNode): Unit =
+			listeners.foreach {
+				case listener: TViewListener =>
+					listener.onNodeAdded(graph, node)
+			}
+	}
+
+	private val listeners = new util.HashSet[TViewListener]()
+
+	graph.listenerAdd(AdaptionListener)
+
+	override def finalize(): Unit = {
+		graph.listenerRemove(AdaptionListener)
+		super.finalize()
+	}
+
+	def listenerAdd(listener: TViewListener) =
+		listeners.add(listener)
+
+	def listenerRemove(listener: TViewListener) =
+		listeners.remove(listener)
 
 	var skin: Skin = new Skin
 
 	private var selectedNode: Node = null
 
-	def changeProperty[T <: AnyRef](name: String, oldValue: T, newValue: T): Unit = {
-		if (oldValue == newValue) return
-		val event: PropertyChangeEvent = new PropertyChangeEvent(this, name, oldValue, newValue)
-		getPropertyChangeListeners.foreach {
-			case listener =>
-				listener.propertyChange(event)
-		}
-	}
-
 	private def selectedNodeSet(newNode: Node): Unit = {
 		val oldNode = selectedNode
 		selectedNode = newNode
-		changeProperty("selectedNode", oldNode, newNode)
+
+		listeners.foreach {
+			case listener : TViewListener =>
+				listener.onNodeSelected(Graph.this, newNode)
+		}
 	}
 
 	def selectedNodeGet = selectedNode
@@ -78,7 +99,6 @@ class Graph(var graph: model.TGraph) extends JComponent {
 	}
 
 	class Drop(val drop: model.TDrop, index: Int, count: Int) extends TPip {
-
 
 		def origin = {
 			val (x, y) = (nodeCache(drop.node).r, nodeCache(drop.node).b)
@@ -127,13 +147,48 @@ class Graph(var graph: model.TGraph) extends JComponent {
 				new Drop(drop, data.drops.indexOf(drop), data.drops.size)
 		}
 
-
 		def select() {
 			selectedNodeSet(this)
 		}
 
-		var x = 0
-		var y = 0
+		var _x = 0
+		var _y = 0
+
+		def x = _x
+
+		def y = _y
+
+		def x(value: Int): Unit = {
+			xy(value, y)
+		}
+
+		def y(value: Int): Unit = {
+			xy(x, value)
+		}
+
+		def x_+=(value: Int): Unit = {
+			xy(x + value, y)
+		}
+
+		def y_+=(value: Int): Unit = {
+			xy(x, y + value)
+		}
+
+		def xy: (Int, Int) = (x, y)
+
+		def xy(xValue: Int, yValue: Int): Unit = {
+			_x = xValue
+			_y = yValue
+
+			listeners.foreach {
+				case listener: TViewListener =>
+					listener.onNodeMoved(Graph.this, Node.this)
+			}
+		}
+
+		def move(ijValue: (Int, Int)): Unit = {
+			xy(_x + ijValue._1, _y + ijValue._2)
+		}
 
 		def w = 141
 

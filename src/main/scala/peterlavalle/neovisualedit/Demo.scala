@@ -5,6 +5,7 @@ import javax.swing.{JFrame, JScrollPane, WindowConstants}
 
 import peterlavalle.neovisualedit.model._
 import peterlavalle.neovisualedit.util.RestoreFrame
+import peterlavalle.neovisualedit.view.{Graph, TViewListener}
 
 object Demo extends JFrame("Demoooo") with App {
 	RestoreFrame(this)
@@ -40,20 +41,29 @@ object Demo extends JFrame("Demoooo") with App {
 			}
 		)
 
-	graph.graph + DemoNode("Foo")
-	graph.graph + DemoNode("Bar")
-	graph.graph + DemoNode("FooBar")
-	graph.graph + DemoNode("BarFoo")
+	graph.graph nodeAdd DemoNode("Foo")
+	graph.graph nodeAdd DemoNode("Bar")
+	graph.graph nodeAdd DemoNode("FooBar")
+	graph.graph nodeAdd DemoNode("BarFoo")
+
+	graph.listenerAdd(
+		new TViewListener {
+			override def onNodeMoved(graph: Graph, node: Graph#Node): Unit = {
+				println(node.data + " @ " + node.xy)
+			}
+
+			override def onNodeSelected(graph: Graph, node: Graph#Node): Unit = {}
+
+			override def onNodeAdded(graph: TGraph, node: TNode): Unit = {}
+		}
+	)
 
 	graph.addMouseListener(control.DragDropToChannel)
 	graph.addMouseListener(control.SelectNode)
 	graph.addMouseMotionListener(control.DragDropToChannel)
 	graph.addMouseMotionListener(new control.DragNode())
 
-	getContentPane.add(
-		new JScrollPane(graph),
-		BorderLayout.CENTER
-	)
+	getContentPane.add(new JScrollPane(graph), BorderLayout.CENTER)
 
 	pack()
 	setVisible(true)

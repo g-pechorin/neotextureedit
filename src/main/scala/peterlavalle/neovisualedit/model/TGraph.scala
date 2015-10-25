@@ -5,7 +5,23 @@ import java.util
 import scala.collection.JavaConversions._
 
 trait TGraph {
-	def +(node: TNode): Unit = nodeList.add(node)
+
+	private val listeners = new util.HashSet[TModelListener]()
+
+	def nodeAdd(node: TNode): Unit = {
+		if (nodeList.add(node))
+			listeners.foreach {
+				case listener =>
+					listener.onNodeAdded(this, node)
+			}
+	}
+
+
+	def listenerAdd(listener: TModelListener) =
+		listeners.add(listener)
+
+	def listenerRemove(listener: TModelListener) =
+		listeners.remove(listener)
 
 	def unlinkAllInto(channel: TChannel): Unit = {
 		if (linkList.nonEmpty) (linkList.size() - 1 to 0).foreach {
