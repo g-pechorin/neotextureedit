@@ -17,30 +17,24 @@
 
 package com.mystictri.neotextureedit;
 
+import apple.dts.samplecode.osxadapter.OSXAdapter;
 import com.mystictri.neotexture.TextureGenerator;
 import com.mystictri.neotexture.TextureGraphNode;
-
+import engine.base.Logger;
+import engine.graphics.synthesis.texture.Channel;
+import engine.graphics.synthesis.texture.Pattern;
+import engine.graphics.synthesis.texture.PatternChecker;
+import engine.graphics.synthesis.texture.ProgressBarInterface;
 import org.pushingpixels.substance.api.skin.SubstanceTwilightLookAndFeel;
+import peterlavalle.neo.NativeUnpack;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.plaf.FontUIResource;
+import java.awt.*;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -48,40 +42,6 @@ import java.io.StringWriter;
 import java.util.Scanner;
 import java.util.Vector;
 import java.util.prefs.Preferences;
-
-import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JProgressBar;
-import javax.swing.JScrollPane;
-import javax.swing.KeyStroke;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.TransferHandler;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.plaf.FontUIResource;
-
-import apple.dts.samplecode.osxadapter.OSXAdapter;
-import engine.base.Logger;
-import engine.graphics.synthesis.texture.Channel;
-import engine.graphics.synthesis.texture.Pattern;
-import engine.graphics.synthesis.texture.PatternChecker;
-import engine.graphics.synthesis.texture.ProgressBarInterface;
-import peterlavalle.NativeUnpack;
 
 /**
  * This is the main window of NeoTextureEdit. It is more or less a singelton
@@ -181,7 +141,7 @@ public class TextureEditor implements ActionListener, KeyListener {
 	ImageIcon s_ButtonIconRGBA_Selector;
 	ImageIcon s_ButtonIconA_Selector;
 
-	public TextureEditor(String[] args) {
+	private TextureEditor(String[] args) {
 		if (INSTANCE != null)
 			Logger.logFatal(this, "Multiple instances of TextureEditor are not allowed.");
 		INSTANCE = this;
@@ -231,7 +191,7 @@ public class TextureEditor implements ActionListener, KeyListener {
 				JPopupMenu.setDefaultLightWeightPopupEnabled(false); // needed for the gl canvas font for the basic help dialogs
 				UIManager.put("OptionPane.messageFont", new FontUIResource(new Font("Monospaced", Font.PLAIN, 12)));
 
-				System.setProperty("org.lwjgl.librarypath", NativeUnpack.folder.getAbsolutePath());
+				System.setProperty("org.lwjgl.librarypath", NativeUnpack.unpackDir().getAbsolutePath());
 
 				try {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -245,13 +205,7 @@ public class TextureEditor implements ActionListener, KeyListener {
 					// UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
 					// UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
 
-				} catch (UnsupportedLookAndFeelException e) {
-					System.err.println("LookAndFeel Exception: " + e);
-				} catch (ClassNotFoundException e) {
-					System.err.println("LookAndFeel Exception: " + e);
-				} catch (InstantiationException e) {
-					System.err.println("LookAndFeel Exception: " + e);
-				} catch (IllegalAccessException e) {
+				} catch (UnsupportedLookAndFeelException | IllegalAccessException | InstantiationException | ClassNotFoundException e) {
 					System.err.println("LookAndFeel Exception: " + e);
 				}
 
